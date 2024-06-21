@@ -4,9 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fetch products.json from your API
     fetch('http://45.66.230.112:5005/products')
         .then(response => response.json())
-        .then(products => {
-            // Clear existing content in productListElement (if any)
-            productListElement.innerHTML = '';
+        .then(data => {
+            // Convert the object to an array of products
+            const products = Object.keys(data).map(key => ({
+                id: key,
+                ...data[key]
+            }));
 
             // Loop through each product and create HTML
             products.forEach(product => {
