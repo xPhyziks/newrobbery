@@ -12,7 +12,74 @@
 
   <script src="https://embed.sellpass.io/embed.js"></script>
   <style>
-    /* Your existing styles */
+    .bg-dark2 {
+      background-color: #1C1C1C; /* Replace this with the actual color or gradient of your site's background */
+    }
+  
+    .products-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      justify-content: center;
+    }
+  
+    .card {
+      flex-basis: calc(33.333% - 16px);
+      max-width: calc(33.333% - 16px);
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 16px;
+      background-color: inherit; /* This makes the card background match the site background */
+      color: #fff; /* Adjust text color for readability */
+      border: none; /* Optional: removes border if you have one */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Optional: adds subtle shadow for depth */
+    }
+  
+    .card-img-top {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+  
+    .card-img-top img {
+      width: 100%;
+      height: auto;
+    }
+  
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .card-title {
+      text-align: center;
+    }
+  
+    .btn {
+      width: 100%;
+    }
+  
+    @media (max-width: 767px) {
+      .card {
+        flex-basis: calc(50% - 16px);
+        max-width: calc(50% - 16px);
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .card {
+        flex-basis: 100%;
+        max-width: 100%;
+      }
+    }
   </style>
 </head>
 <body class="bg-dark2">
