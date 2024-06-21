@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .catch(error => {
       console.error('Error fetching products:', error);
-      productListElement.innerHTML = '<p>Error fetching products.</p>';
+      productListElement.innerHTML = '<p>Error fetching products. Please try again later.</p>';
     });
 
   function createProductCard(product) {
