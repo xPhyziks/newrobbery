@@ -1,54 +1,49 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const productListElement = document.getElementById('product-list');
+  const productList = document.getElementById('product-list');
 
-    // Fetch products.json from your API
-    fetch('http://45.66.230.112:5005/products')
-        .then(response => response.json())
-        .then(data => {
-            // Convert the object to an array of products
-            const products = Object.keys(data).map(key => ({
-                id: key,
-                ...data[key]
-            }));
+  // Fetch data from API
+  fetch('http://45.66.230.112:5005/products')
+    .then(response => response.json())
+    .then(data => {
+      // Iterate over each product in the response
+      Object.keys(data).forEach(key => {
+        const product = data[key];
+        const { image, name, price } = product;
 
-            // Loop through each product and create HTML
-            products.forEach(product => {
-                // Create card element
-                const card = document.createElement('div');
-                card.classList.add('card', 'mb-3');
+        // Create HTML elements for product card
+        const card = document.createElement('div');
+        card.classList.add('card');
 
-                // Card image
-                const cardImage = document.createElement('div');
-                cardImage.classList.add('card-img-top', 'mb-2', 'image');
-                const image = document.createElement('img');
-                image.setAttribute('alt', 'product image');
-                image.setAttribute('data-src', product.image);
-                image.setAttribute('src', product.image); // Assuming image URL is provided in products.json
-                cardImage.appendChild(image);
-                card.appendChild(cardImage);
+        const imageDiv = document.createElement('div');
+        imageDiv.classList.add('card-img-top', 'mb-2', 'image');
+        const img = document.createElement('img');
+        img.setAttribute('src', image);
+        img.setAttribute('alt', 'product image');
+        imageDiv.appendChild(img);
 
-                // Card body
-                const cardBody = document.createElement('div');
-                cardBody.classList.add('card-body');
-                const title = document.createElement('h5');
-                title.classList.add('card-title');
-                title.textContent = product.name;
-                const purchaseButton = document.createElement('button');
-                purchaseButton.classList.add('btn', 'btn-primary', 'w-100');
-                purchaseButton.textContent = `Purchase | $${product.price.toFixed(2)}`; // Assuming price is provided in products.json
-                // Assuming you want to use SellPass data attributes for customization
-                purchaseButton.setAttribute('data-sellpass-product-path', product.name);
-                purchaseButton.setAttribute('data-sellpass-domain', 'robberyy.sellpass.io');
-                cardBody.appendChild(title);
-                cardBody.appendChild(purchaseButton);
-                card.appendChild(cardBody);
+        const cardBody = document.createElement('div');
+        cardBody.classList.add('card-body');
+        const title = document.createElement('h5');
+        title.classList.add('card-title');
+        title.textContent = name;
+        cardBody.appendChild(title);
 
-                // Append card to product list
-                productListElement.appendChild(card);
-            });
-        })
-        .catch(error => {
-            console.error('Error fetching products:', error);
-            productListElement.innerHTML = '<p>Error fetching products.</p>';
-        });
+        const button = document.createElement('button');
+        button.classList.add('btn', 'btn-primary', 'w-100');
+        button.setAttribute('data-sellpass-product-path', name.replace(/\s+/g, '-'));
+        button.setAttribute('data-sellpass-domain', 'robberyy.sellpass.io');
+        button.textContent = `Purchase | $${price}`;
+        cardBody.appendChild(button);
+
+        // Append image and body to card
+        card.appendChild(imageDiv);
+        card.appendChild(cardBody);
+
+        // Append card to product list
+        productList.appendChild(card);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching products:', error);
+    });
 });
