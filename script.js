@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const productListElement = document.getElementById('product-list');
 
     // Fetch products.json from your API
-    fetch('http://0.0.0.0/products.json')
+    fetch('http://45.66.230.112:5005/products.json')
         .then(response => response.json())
         .then(products => {
             // Loop through each product and create HTML
