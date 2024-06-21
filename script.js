@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('http://45.66.230.112:5005/products')
         .then(response => response.json())
         .then(products => {
+            // Clear existing content in productListElement (if any)
+            productListElement.innerHTML = '';
+
             // Loop through each product and create HTML
             products.forEach(product => {
                 // Create card element
